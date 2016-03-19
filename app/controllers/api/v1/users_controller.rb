@@ -3,7 +3,7 @@ class Api::V1::UsersController < Api::ApiController
 
   def update
     user = current_user
-    if user.high_score.nil? || user.high_score < params[:high_score].to_i
+    if user.high_score.nil? || user.high_score > params[:score].to_i
       user.high_score = params[:score]
       user.save
     end
