@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   validates :u_id, presence: true, uniqueness: true
 
-  default_scope -> { order(high_score: :desc) }
+  default_scope -> { order(high_score: :asc) }
 
   def self.find_or_create_from_auth(auth)
     user = User.find_or_create_by(u_id: auth['uid'])
