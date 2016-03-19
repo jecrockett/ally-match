@@ -1,0 +1,15 @@
+<header>
+	<div class="container">
+		<h1><%= link_to "Ally Match", root_path %></h1>
+    <%= link_to "Logout", logout_path, id: 'logout-btn', class: 'nav-score' %>
+		<%= link_to "High Scores", highscores_path, id: 'high-scores-nav', class: 'nav-score'%>
+    <div class="nav-score">
+      <p>
+        Your High Score:
+      </p>
+      <span id="high-score">
+        <%= current_user.high_score %>
+      </span>
+    </div>
+	</div>
+</header>

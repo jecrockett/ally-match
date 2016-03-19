@@ -1,0 +1,30 @@
+<%= render 'partials/header' %>
+
+<h2>All-Time High Scores</h2>
+
+<div id="hall-of-fame">
+  <table>
+		<thead>
+	    <tr>
+	      <th>
+	        Name
+	      </th>
+	      <th>
+	        Score
+	      </th>
+	    </tr>
+		</thead>
+		<tbody>
+	    <% @users.each do |user| %>
+				<tr>
+		      <td>
+		        <%= user.name %>
+		      </td>
+		      <td>
+		        <%= user.high_score %>
+		      </td>
+				</tr>
+	    <% end %>
+		</tbody>
+  </table>
+</div>

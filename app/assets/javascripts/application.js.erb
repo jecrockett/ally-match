@@ -1,0 +1,142 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+
+$(document).ready(function(){
+  console.log("JS Loaded!");
+
+  var uniqueCards = [
+    "<%= asset_path('ally_1.jpg') %>",
+    "<%= asset_path('ally_2.jpg') %>",
+    "<%= asset_path('ally_3.jpg') %>",
+    "<%= asset_path('ally_4.jpg') %>",
+    "<%= asset_path('ally_5.jpg') %>",
+    "<%= asset_path('ally_6.jpg') %>",
+    "<%= asset_path('ally_7.jpg') %>",
+    "<%= asset_path('ally_8.jpg') %>",
+    "<%= asset_path('ally_9.jpg') %>",
+  ];
+
+  var cards = uniqueCards.concat(uniqueCards);
+
+  //randomize array of cards
+  var randomizeCards = function() {
+    Array.prototype.randomize = function() {
+      var i = this.length, j, temp;
+      while (--i > 0) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this[j];
+        this[j] = this[i];
+        this[i] = temp;
+      }
+    };
+    cards.randomize();
+  };
+
+  //create divs from cards array
+  var newGame = function() {
+    var pairsRemaining = 9;
+    var totalGuesses = 0;
+    randomizeCards();
+    for (var i = 0; i < (cards.length); i++) {
+         $("#game-container").append("<div class='tiles'> <img class='hidden' src='"+cards[i]+"'/></div>");
+    }
+  };
+
+  //Start New Game
+  newGame();
+
+
+  var guesses = 0;
+  var guess1 = "";
+  var guess2 = "";
+  var pairsRemaining = 9;
+  var totalGuesses = 0;
+
+  function createCounter() {
+      $(".container").append("<div id='guessCounter' class='nav-score'><p>Current Score</p><span id='guessCount'>" +
+                              totalGuesses +
+                              "</span></div>");
+  };
+  createCounter();
+
+  function updateCounter() {
+      $("#guessCount").text(totalGuesses);
+  }
+
+  $(".tiles").on("click", function() {
+   if (guesses < 2 && $(this).children("img").hasClass("hidden") === true) {
+
+      //increase guess count
+      totalGuesses = totalGuesses + 1;
+      updateCounter();
+      guesses = guesses + 1;
+
+      //reveal image
+      $(this).children("img").removeClass("hidden");
+
+      //save guesses
+      if (guesses === 1) {
+        guess1 = $(this).children("img").attr("src");
+      }
+      else {
+        guess2 = $(this).children("img").attr("src");
+
+        //check for a match
+        if (guess1 === guess2) {
+            pairsRemaining = pairsRemaining - 1;
+            $(".tiles").children("img[src='"+guess2+"']").addClass("match");
+
+          //is the game over?
+          if (pairsRemaining === 0) {
+              var score = $('#guessCount').text();
+
+              //report the score
+              $.ajax({
+                type: "PUT",
+                url: "/api/v1/users/id",
+                data: {
+                  score: score
+                },
+                success: function(response){
+                  console.log("Score update complete.");
+                },
+                error: function(xhr) {
+                  console.log(xhr.responseText)
+                }
+              });
+
+              alert("Congratulations! You Won in "+totalGuesses+" moves. Try Again!");
+              document.location.reload(true);
+          }
+        }
+
+        //else re-hide images
+        else {
+          setTimeout(function() {
+              $("img").not(".match").addClass("hidden");
+          }, 400);
+        }
+
+        //reset variables
+        guesses = 0;
+        guess1 = "";
+        guess2 = "";
+
+      }
+    }
+  });
+})

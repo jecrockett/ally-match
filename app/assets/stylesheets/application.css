@@ -1,0 +1,217 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  margin: 0 0;
+  height: 100vh;
+  background-color: #e8e8e8;
+}
+
+.home-wrapper {
+  background-color: rgba(54, 52, 91, .4);
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.home-content {
+  font-family: 'Pacifico';
+  text-align: center;
+  width: 550px;
+  margin: 0 auto;
+  border: 1px solid purple;
+  padding: 20px 0 50px 0;
+}
+
+.home-content h1 {
+  font-size: 60px;
+  color: #36345B;
+}
+
+.home-content h4 {
+  font-family: 'arial', 'sans-serif';
+}
+
+.login-link {
+  margin-top: 60px;
+}
+
+.login-link a {
+        font-size: 1.5em;
+        color: #36345B;
+        text-decoration: none;
+        border: 3px solid #36345B;
+        border-radius: 6px;
+        padding: 15px;
+}
+
+
+ .container {
+   width: 100%;
+   display: inline-block;
+   margin: 0 auto;
+   height: 100px;
+   border-bottom: 1px solid;
+   background-color: #36345B;
+ }
+
+ h1 {
+   margin: 0 0;
+ }
+
+ h1 a {
+   text-decoration: none;
+   font-family: 'Pacifico';
+   font-size: 45px;
+   max-width: 60%;
+   float: left;
+   padding-left: 4%;
+   color: white;
+ }
+
+ h2 {
+   text-align: center;
+   font-family: 'Pacifico';
+   font-size: 36px;
+   color: #36345B;
+ }
+
+.nav-score {
+  width: 65px;
+  text-align: center;
+  float: right;
+  padding-top: 10px;
+  padding-right: 15px;
+  color: white;
+}
+
+#logout-btn {
+  font-family: 'Pacifico';
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+#high-scores-nav {
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+  font-family: 'Pacifico';
+}
+
+#hall-of-fame {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: 1px solid purple;
+  text-align: center;
+  padding: 20px;
+  font-family: 'arial', 'sans-serif';
+}
+
+#hall-of-fame th {
+  border-bottom: 2px solid purple;
+}
+
+#hall-of-fame tr {
+  border-bottom: 1px solid purple;
+}
+
+#hall-of-fame td {
+  width: 50%;
+  padding: 15px;
+}
+
+ .nav-score p {
+   font-size: 9px;
+ }
+
+ .nav-score span {
+   font-size: 30px;
+ }
+
+ #game-container {
+   width: 990px;
+   height: 700px;
+   margin: 20px auto;
+   clear: both;
+ }
+
+ .tiles {
+   height: 165px;
+   width: 165px;
+   text-align: center;
+   float: left;
+   background-image: url('card_background.jpg');
+   background-repeat: no-repeat;
+   background-size: contain;
+ }
+
+ .hidden {
+   display: none;
+ }
+
+ .tiles > img {
+   padding-top: 12px;
+   max-width: 140px;
+   max-height: 140px;
+ }
+
+ @media (max-width: 1020px) {
+   .container {
+     width: 100%;
+     height: 330px;
+     display: block;
+     text-align: center;
+   }
+   .container > img {
+     max-width: 60%;
+     height: 80px;
+     padding-left: 0;
+     float: none;
+   }
+   h1 {
+     padding: 0;
+     margin: 0;
+     max-width: 100%;
+     float: none;
+   }
+   #game-container {
+     clear: both;
+     width: 515px;
+
+   }
+ }
+
+ @media (max-width: 530px) {
+   .container {
+     height: 100px;
+   }
+   .container > img {
+     height: 30px;
+     position: relative;
+     top:-30px;
+   }
+   .container > h1 {
+     font-size: 45px;
+   }
+   #container {
+     width: 344px;
+     margin-top: 130px;
+   }
+   #guessCounter {
+     left: -22px;
+     font-size: 60px;
+   }
+ }
